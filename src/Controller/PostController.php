@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PostController extends AbstractController
 {
-    #[Route('/post', name: 'app_post', methods: ['POST','GET'])]
+    #[Route('/poster-un-statut', name: 'app_post', methods: ['POST','GET'])]
     public function index(ManagerRegistry $doctrine, Request $request): Response
     {
         $post = new Post();

@@ -1,0 +1,99 @@
+<div class="twitter-wrap">
+    <div class="side-left">
+        <ul class="menu">
+            <li class="menu-item">
+                <a class="menu-link active">
+                    <i class="fas fa-dove"></i>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a class="menu-link" href="#">
+                    <i class="fas fa-home"></i>
+                    <span>Accueil</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a class="menu-link" href="#">
+                    <i class="fas fa-hashtag"></i>
+                    <span>Explorer</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="#">
+                    <i class="fas fa-bell"></i>
+                    <span>Notifications</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="#">
+                    <i class="fas fa-envelope"></i>
+                    <span>Messages</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="#">
+                    <i class="fas fa-bookmark"></i>
+                    <span>Signets</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="#">
+                    <i class="fas fa-sticky-note"></i>
+                    <span>Listes</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="#">
+                    <i class="fas fa-user"></i>
+                    <span>Profil</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a class="menu-link" href="#">
+                    <i class="fas fa-ellipsis-h"></i>
+                    <span>Plus</span>
+                </a>
+            </li>
+
+            <li class="button-add-twit">
+                <a class="add-twit" href="#">
+                    <span>Tweeter</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a class="menu-link" href="#">
+                    {# <img class="user-img-30" alt="" src="https://i.imgur.com/4FbD7mF.png"> #}
+                    <img class="user-img-30" src="{{ post.user.img|default('https://avatars.dicebear.com/api/pixel-art/' ~ random() ~'.svg') }}" />
+                    <span>Nejma</span>
+                </a>
+
+                <div class="box">
+                    {# <img src="https://i.imgur.com/4FbD7mF.png" alt="" class="user-img-40"> #}
+                    <img class="user-img-40" src="{{ post.user.img|default('https://avatars.dicebear.com/api/pixel-art/' ~ random() ~'.svg') }}" />
+                    <p class="name">David smith</p>
+                    <p class="username">@davidsmith</p>
+                    <div class="bio">Front-end web developer</div>
+                        <div class="folow">
+                            <a href="#"><span>83</span> Following</a>
+                            <a href="#"><span>83</span> Followers</a>
+                        </div>
+                    </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="side-main"> 
+    <div class="top-fixed">
+        {% if app.request.attributes.get('_route') == 'app_home' %}
+            <a href="{{ path("app_home") }}" class="link-home">Accueil</a>
+        {% elseif app.request.attributes.get('_route') == '' %}
+
+        {% endif %} 
+        
+    </div>
+

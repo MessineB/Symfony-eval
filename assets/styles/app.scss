@@ -1,14 +1,20 @@
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import "~bootstrap/scss/bootstrap";
 
-body {
-    background-color: lightgray;
-}
-:root{
-    --flash-bg-success: #ffffff;
-    --flash-text-success: #4aac32;
-    --flash-bg-warning: #d53648;
-    --flash-text-warning: #837e7e;
+/* Variables couleurs */
+$flash-bg-success:#4aac32;
+$flash-text: #ffffff;
+$flash-bg-warning: #d53648;
+$color-twitter:#1B95E0;
+$color-grey:#999;
+$color-dark:#000;
+$color-white:#fff;
+$color-light:#eee;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 /* Notifications */
@@ -20,8 +26,8 @@ body {
     text-align: center;
     font-size: 23px;
     font-weight: 700;
-    background-color: var(--flash-bg-success);
-    color: var(--flash-text-success);
+    background-color: $flash-bg-success;
+    color: $flash-text;
     animation: blinker 3s linear 2;
 }
 
@@ -33,8 +39,8 @@ body {
     text-align: center;
     font-size: 23px;
     font-weight: 700;
-    background-color: var(--flash-bg-warning);
-    color: var(--flash-text-warning);
+    background-color: $flash-bg-warning;
+    color: $flash-text;
     animation: blinker 3s linear 3;
 }
 
@@ -43,12 +49,280 @@ body {
     margin: auto;
     padding: 10px;
     border-radius: 10px;
-    background-color: var(--flash-bg-warning);
-    color: var(--flash-text-warning);
+    background-color: $flash-bg-warning;
+    color: $flash-text;
 }
 
 @keyframes blinker {
     50% {
         opacity: 0;
+    }
+}
+
+
+/* Sidebar Twitter */
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+/***************/
+.twitter-wrap {
+    display: grid;
+    grid-template-columns: 20% 50% 30%;
+    position: relative;
+}
+
+.side-left {
+    border-right: 1px solid $color-light;
+    position: fixed;
+    height: 100%;
+    width: 25%;
+    text-align: right;
+    z-index: 1;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 75%;
+
+    .menu-item {
+        padding: 0px 20px;
+        margin-bottom: 0px;
+
+        .menu-link {
+            width: 55px;
+            height: 55px;
+            display: flex;
+            justify-content: flex-start;
+            text-align: center;
+            align-items: center;
+            border-radius: 50%;
+            margin-left: auto;
+
+            &:hover {
+                background-color: lighten($color-twitter, 40%);
+                width: 168px;
+                border-radius: 25px;
+
+                i {
+                    color: $color-twitter;
+                }
+
+                &.box {
+                    display: block !important;
+                }
+            }
+
+            i,
+            span {
+                color: $color-dark;
+                font-size: 25px;
+                line-height: 55px;
+                padding: 0 6%;
+            }
+
+            &.active {
+                i {
+                    color: $color-twitter;
+                }
+            }
+
+
+        }
+
+        .box {
+            display: none;
+            padding: 20px;
+            position: absolute;
+            box-shadow: 0px 0px 10px #ccc;
+            background-color: #fff;
+            margin-top: -240px;
+            margin-left: 116px;
+            width: 300px;
+            border-radius: 10px;
+            text-align: left;
+            z-index: 9;
+
+            .name {
+                font-size: 16px;
+                font-weight: 600;
+                margin-top: 5px;
+            }
+
+            .username {
+                color: $color-grey;
+            }
+
+            .bio {
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
+            .folow {
+                display: flex;
+
+                a {
+                    display: inline-block;
+                    margin-right: 10px;
+                    color: $color-grey;
+
+                    span {
+                        color: $color-dark !important;
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+
+        &:hover {
+            .user-img-30 {
+                border: 2px solid $color-twitter;
+            }
+
+            .box {
+                display: block;
+
+            }
+        }
+    }
+}
+
+.user-img-30 {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-top: 12px;
+    border: 2px solid $color-white;
+
+}
+
+.user-img-40 {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.button-add-twit {
+    display: flex;
+
+    .add-twit {
+        background-color: $color-twitter;
+        margin-top: 10px;
+        padding: 20% 60%;
+        font-size: 20px;
+        border-radius: 36px;
+
+        span {
+            color: $color-white !important;
+        }
+
+        &:hover {
+            background-color: darken($color-twitter, 10%) !important;
+        }
+    }
+}
+
+
+
+
+//*********************
+.side-main {
+    border-right: 1px solid $color-light;
+    position: absolute;
+    width: 45%;
+    height: 100%;
+    margin-left: 25%;
+    z-index: - 1;
+
+    .link-home {
+        font-weight: 500;
+        color: $color-dark;
+        font-size: 20px;
+    }
+
+
+    .write-twit {
+        margin-top: 60px;
+        padding: 20px 10px;
+        background-color: $color-white;
+        display: block;
+
+        .picture-text {
+            display: flex;
+        }
+
+        img {
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            border: 0;
+            color: $color-grey;
+            padding: 10px;
+            width: 100%;
+            font-size: 20px;
+            outline: 0 none;
+            resize: none;
+        }
+
+        .add-tweet {
+            background-color: $color-twitter;
+            padding: 2% 4%;
+            font-weight: 600;
+            font-size: 18px;
+            border-radius: 36px;
+            color: $color-white;
+            border: none;
+
+            &:hover {
+                background-color: darken($color-twitter, 10%) !important;
+            }
+        }
+    }
+
+}
+
+.top-fixed {
+    position: fixed;
+    top: 0;
+    border-bottom: 1px solid $color-light;
+    border-right: 1px solid $color-light;
+    padding: 20px 10px;
+    height: 60px;
+    width: 45%;
+    background-color: $color-white;
+}
+
+/**************************/
+.side-right {
+    width: 30%;
+    border-left: 1px solid $color-light;
+    padding: 10px 5px;
+    right: 0;
+    position: absolute;
+
+}
+
+.search-form {
+    background-color: $color-light;
+    padding: 10px 20px;
+    border-radius: 30px;
+
+    input {
+        border: 0;
+        background-color: $color-light;
+        color: $color-grey;
+        font-size: 14px;
+
+    }
+
+    i {
+        color: $color-grey;
     }
 }

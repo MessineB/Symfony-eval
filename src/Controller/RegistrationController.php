@@ -13,8 +13,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class RegistrationController extends AbstractController
 {
-    #[Route('/registration', name: 'app_registration')]
-    public function index(Request $request, UserPasswordHasherInterface $passwordEncoder , ManagerRegistry $doctrine): Response
+    #[Route('/inscription', name: 'app_registration')]
+    public function registration(Request $request, UserPasswordHasherInterface $passwordEncoder , ManagerRegistry $doctrine): Response
     {   
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
