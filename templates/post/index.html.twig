@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page d'accueil{% endblock %}
+
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block body %}
+
+<section class="col-md-8 container py-4">
+
+    <h1 class="text-center">Ajouter un post</h1>
+
+    {{ form_start(form) }}
+    {{ form_end(form) }}
+
+</section>
+
+{% endblock %}
