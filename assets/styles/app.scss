@@ -4,3 +4,51 @@
 body {
     background-color: lightgray;
 }
+:root{
+    --flash-bg-success: #ffffff;
+    --flash-text-success: #4aac32;
+    --flash-bg-warning: #d53648;
+    --flash-text-warning: #837e7e;
+}
+
+/* Notifications */
+.flash-success {
+    width: fit-content;
+    margin: auto;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 23px;
+    font-weight: 700;
+    background-color: var(--flash-bg-success);
+    color: var(--flash-text-success);
+    animation: blinker 3s linear 2;
+}
+
+.flash-warning {
+    width: fit-content;
+    margin: auto;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 23px;
+    font-weight: 700;
+    background-color: var(--flash-bg-warning);
+    color: var(--flash-text-warning);
+    animation: blinker 3s linear 3;
+}
+
+.form-errors {
+    width: fit-content;
+    margin: auto;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--flash-bg-warning);
+    color: var(--flash-text-warning);
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
