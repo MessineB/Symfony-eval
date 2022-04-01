@@ -6,7 +6,7 @@ $flash-bg-success:#4aac32;
 $flash-text: #ffffff;
 $flash-bg-warning: #d53648;
 $color-twitter:#1B95E0;
-$color-grey:#999;
+$color-grey:#7e7e7e;
 $color-dark:#000;
 $color-white:#fff;
 $color-light:#eee;
@@ -127,11 +127,11 @@ a {
                 padding: 0 6%;
             }
 
-            &.active {
-                i {
-                    color: $color-twitter;
-                }
+            span {
+                font-size: 18px !important;
+                padding-left: 25% !important;
             }
+
 
 
         }
@@ -286,6 +286,10 @@ a {
         }
     }
 
+    .main-scroll-content {
+        overflow: scroll;
+    }
+
 }
 
 .top-fixed {
@@ -305,24 +309,65 @@ a {
     border-left: 1px solid $color-light;
     padding: 10px 5px;
     right: 0;
-    position: absolute;
+    position: fixed;
 
-}
+    .search-form {
 
-.search-form {
-    background-color: $color-light;
-    padding: 10px 20px;
-    border-radius: 30px;
+        padding: 5% 11%;
+        width: 100%;
+        border-radius: 30px;
+        background: #eee url(https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Search_Noun_project_15028.svg/1174px-Search_Noun_project_15028.svg.png) top 41% left 4% no-repeat;
+        background-size: 17px;
+        height: 30px;
+        border: none;
 
-    input {
-        border: 0;
+        input {
+            border: 0;
+            background-color: $color-light;
+            color: $color-grey;
+            font-size: 14px;
+
+        }
+
+        i {
+            color: $color-grey;
+        }
+    }
+
+    .trending-right {
         background-color: $color-light;
-        color: $color-grey;
-        font-size: 14px;
+        margin: 5%;
+        border-radius: 20px;
 
+        .title-trending {
+            font-size: 20px;
+            font-weight: 600;
+            padding: 6% 4% 0 4%;
+        }
+
+        .hashtags {
+
+            padding: 5%;
+
+            &:hover {
+                background-color: darken($color-light, 5%) !important;
+            }
+
+            a {
+                color: $color-dark;
+                display: flex;
+                flex-direction: column;
+
+                .word-trending {
+                    font-weight: 600;
+                }
+            }
+        }
+
+        .empty-space {
+            padding: 2%;
+        }
     }
 
-    i {
-        color: $color-grey;
-    }
+
 }
