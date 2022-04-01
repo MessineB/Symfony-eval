@@ -13,7 +13,7 @@ class HomeController extends AbstractController
     public function home(PostRepository $postRepository): Response
     {
         return $this->render('home/index.html.twig', [
-            'post' => $postRepository->findAll(),
+            'posts' => $postRepository->findAll(),
         ]);
     }
 }
