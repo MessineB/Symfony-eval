@@ -17,9 +17,10 @@ class RegistrationController extends AbstractController
     public function index(Request $request, UserPasswordHasherInterface $passwordEncoder , ManagerRegistry $doctrine): Response
     {   
         $user = new User();
-        $form = $this->createForm(RegistrationType::Class, $user);
+        $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 
+        //Si le formulaire est soumis et qu'il est valide: 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
@@ -33,9 +34,12 @@ class RegistrationController extends AbstractController
             $entityManager = $doctrine->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
-            $this->addFlash('success', 'Votre compte a été créé avec succès ! Veuillez vous authentifier');
             return $this->redirectToRoute('app_login');
+            $this->addFlash('success', 'Votre compte a été créé avec succès ! Veuillez vous authentifier');
+        }
+        //Si le formulaire est soumis et qu'il y a des erreurs:
+        if ($form->isSubmitted() && $form->getErrors()) {
+            $this->addFlash('warning', 'Vérifiez d\'avoir remplis tous les champs requis et d\'avoir accepté les conditions d\'utilisation de nos services');
         }
         return $this->render('registration/index.html.twig', [
             'RegistrationForm' => $form->createView() ,

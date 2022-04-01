@@ -72,7 +72,6 @@ class RegistrationType extends AbstractType
             ->add('picture', FileType::class, [
                 'label' => 'Votre photo de profil',
                 'required' => false ,
-               
             ]  )
             ->add('submit', SubmitType::class , [
                 "label" => "Envoyer"
