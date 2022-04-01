@@ -2,8 +2,13 @@
 
 {% block title %}Hello RegistrationController!{% endblock %}
 
+{% form_theme RegistrationForm 'bootstrap_5_layout.html.twig' %}
 {% block body %}
+
+<section class="col-md-8 container py-4">
+<h1 class="text-center">Inscription</h1>
 {{ form_start(RegistrationForm) }}
 
 {{ form_end(RegistrationForm) }}
+</section>
 {% endblock %}
