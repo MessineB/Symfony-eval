@@ -33,6 +33,12 @@
 							<div class="Avatar"> </div></span><span class="TweetAuthor-name">{{post.user.username}} </span> <span class="Icon Icon--verified"> </span><span class="TweetAuthor-screenName">@{{post.user.username}} </span></div>
 				</div>
 				<div class="timeline-Tweet-text">{{post.content}}</div>
+				{% if post.picture is null %}
+	
+				{% else %}
+					<img src="{{images ~ post.picture}}" class="picture-post"/>
+				{% endif %}
+				
 				<div class="timeline-Tweet-metadata"><span class="timeline-Tweet-timestamp">{{post.createdAt|date('d M Y H:i:s')}}</span></div>
 				<ul class="timeline-Tweet-actions">
 					<li class="timeline-Tweet-action"><a class="fa-regular fa-heart" href="#"></a></li>
