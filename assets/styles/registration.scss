@@ -40,6 +40,10 @@
 
     form{
         padding: 1% 20% 1% 2%;
+
+        textarea#registration_bio {
+            resize: none;
+        }
     }
 }
 
