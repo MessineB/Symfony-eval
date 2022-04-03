@@ -64,25 +64,30 @@
                 </a>
             </li>
 
+            {% if app.user %}
             <li class="menu-item">
                 <a class="menu-link" href="#">
                     {# <img class="user-img-30" alt="" src="https://i.imgur.com/4FbD7mF.png"> #}
                     <img class="user-img-30" src="{{ post.user.img|default('https://avatars.dicebear.com/api/pixel-art/' ~ random() ~'.svg') }}" />
-                    <span>Nejma</span>
+                    <span>{{app.user.username}}</span>
                 </a>
 
                 <div class="box">
                     {# <img src="https://i.imgur.com/4FbD7mF.png" alt="" class="user-img-40"> #}
                     <img class="user-img-40" src="{{ post.user.img|default('https://avatars.dicebear.com/api/pixel-art/' ~ random() ~'.svg') }}" />
-                    <p class="name">David smith</p>
-                    <p class="username">@davidsmith</p>
-                    <div class="bio">Front-end web developer</div>
+                    <p class="name">{{app.user.username}}</p>
+                    <p class="username">@{{app.user.username}}</p>
+                    <div class="bio">{{app.user.bio}}</div>
                         <div class="folow">
                             <a href="#"><span>83</span> Following</a>
                             <a href="#"><span>83</span> Followers</a>
                         </div>
+                    <div class="logout">
+                        <a href="{{path('app_logout')}}" class="linkLogout">Se déconnecter</a>
+                    </div>    
                     </div>
             </li>
+            {% endif %}
         </ul>
     </div>
 </div>
