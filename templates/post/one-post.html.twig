@@ -24,7 +24,11 @@
 				</div>
 				<div class="timeline-Tweet-author">
 					<div class="TweetAuthor"><a class="TweetAuthor-link" href="#channel"> </a><span class="TweetAuthor-avatar"> 
-							<div class="Avatar"> </div></span><span class="TweetAuthor-name">{{post.user.username}} </span> <span class="Icon Icon--verified"> </span><span class="TweetAuthor-screenName">@{{post.user.username}} </span></div>
+					{% if post.user.picture is null %}
+					<div class="Avatar" style="background: url(data:image/png;base64,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);"> </div></span><span class="TweetAuthor-name">{{post.user.username}} </span> <span class="Icon Icon--verified"> </span><span class="TweetAuthor-screenName">@{{post.user.username}} </span></div>
+					{% else %}
+						<div class="Avatar" style="background: url({{profile_image ~ post.user.picture}});"> </div></span><span class="TweetAuthor-name">{{post.user.username}} </span> <span class="Icon Icon--verified"> </span><span class="TweetAuthor-screenName">@{{post.user.username}} </span></div>
+					{% endif %}
 				</div>
 				<div class="timeline-Tweet-text">{{post.content}}</div>
 				{% if post.picture is null %}
@@ -45,7 +49,11 @@
 	<div class="write-twit">
 	{{ form_start(form) }}
         <div class="picture-text">
-            <img class="user-img-40" src="{{ post.user.img|default('https://avatars.dicebear.com/api/pixel-art/' ~ random() ~'.svg') }}" />
+		{% if app.user.picture %}
+        	<img src="{{ profile_image ~ app.user.picture}}" alt="" class="user-img-40">
+            {% else %}
+            	<img class="user-img-40" src="{{ post.user.img|default('https://avatars.dicebear.com/api/pixel-art/' ~ random() ~'.svg') }}" />
+			{% endif %}
            	{{ form_row(form.content) }}
         </div>
         <button type="submit" class="add-tweet">Tweeter</button>
@@ -61,7 +69,12 @@
 				</div>
 				<div class="timeline-Tweet-author">
 					<div class="TweetAuthor"><a class="TweetAuthor-link" href="#channel"> </a><span class="TweetAuthor-avatar"> 
-							<div class="Avatar"> </div></span><span class="TweetAuthor-name">{{comment.user.username}} </span> <span class="Icon Icon--verified"> </span><span class="TweetAuthor-screenName">@{{comment.user.username}} </span></div>
+					{% if comment.user.picture is null %}
+						<div class="Avatar" style="background: url(data:image/png;base64,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);"> </div></span><span class="TweetAuthor-name">{{post.user.username}} </span> <span class="Icon Icon--verified"> </span><span class="TweetAuthor-screenName">@{{post.user.username}} </span></div>
+					{% else %}
+						<div class="Avatar" style="background: url({{profile_image ~ comment.user.picture}});"> </div></span><span class="TweetAuthor-name">{{comment.user.username}} </span> <span class="Icon Icon--verified"> </span><span class="TweetAuthor-screenName">@{{comment.user.username}} </span></div>
+					{% endif %}
+
 				</div>
 				<div class="timeline-Tweet-text">{{comment.content}}</div>
 

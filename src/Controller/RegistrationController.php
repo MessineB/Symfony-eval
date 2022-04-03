@@ -30,6 +30,16 @@ class RegistrationController extends AbstractController
                 )
             );
             $user->setRoles(["ROLE_USER"]); /* Attribut par défaut le rôle User aux nouveaux inscrits */
+            
+            if ($picture = $form->get("picture")->getData()) {
+                $namePicture = pathinfo($picture->getClientOriginalName(), PATHINFO_FILENAME);
+                $namePicture = str_replace(" ", "_", $namePicture);
+                $namePicture .= uniqid() . "." . $picture->guessExtension();
+                
+                $picture->move($this->getParameter("profile_image"), $namePicture);
+                
+                $user->setPicture($namePicture);
+            } 
 
             $entityManager = $doctrine->getManager();
             $entityManager->persist($user);

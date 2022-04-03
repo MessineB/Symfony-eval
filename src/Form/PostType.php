@@ -32,6 +32,7 @@ class PostType extends AbstractType
             ])
             ->add('picture', FileType::class,[
                 'label'=> false,
+                'required' => false
             ]);
     }
 
