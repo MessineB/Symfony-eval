@@ -22,7 +22,7 @@ class RegistrationType extends AbstractType
         $builder
         ->add('email', EmailType::class,
         [
-            'label' => 'Votre email *',
+            'label' => 'Email *',
             'constraints' => [
                 new NotBlank([
                     'message' => "Merci d'entrer une adresse mail valide, cette dernière sera nécéssaire pour vous connecter",
@@ -32,7 +32,7 @@ class RegistrationType extends AbstractType
         ->add('password', PasswordType::class, [
             // instead of being set onto the object directly,
             // this is read and encoded in the controller
-            'label' => 'Choisir un mot de passe *',
+            'label' => 'Mot de passe *',
             'mapped' => false,
             'attr' => ['autocomplete' => 'new-password'],
             'constraints' => [
@@ -49,19 +49,19 @@ class RegistrationType extends AbstractType
             ],
         ])
         ->add('firstname', TextType::class, [
-            'label' => 'Votre prénom *',
+            'label' => 'Prénom *',
             'required' => true,
         ])
         ->add('lastname', TextType::class, [
-            'label' => 'Votre nom *',
+            'label' => 'Nom *',
             'required' => true,
         ])
         ->add('username', TextType::class, [
-            'label' => 'Choisir un pseudo *',
+            'label' => 'Pseudo *',
             'required' => true,
         ])
             ->add('bio' , TextareaType::class , [
-                'label' => 'Votre description *',
+                'label' => 'Description *',
                 'attr' => [
 
                     'placeholder' => 'Parlez de vous',
@@ -70,12 +70,9 @@ class RegistrationType extends AbstractType
                 'required' => true,
             ])
             ->add('picture', FileType::class, [
-                'label' => 'Votre photo de profil',
+                'label' => 'Photo de profil',
                 'required' => false ,
             ]  )
-            ->add('submit', SubmitType::class , [
-                "label" => "Envoyer"
-            ] )
         ;
     }
 

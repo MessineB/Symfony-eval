@@ -1,0 +1,45 @@
+.leftSide{
+    width: 40%;
+    background: url("../../public/img/backgrounds/background_login.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 169vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg.r-jwli3a.r-4qtqp9.r-yyyyoo.r-rxcuwo.r-1777fci.r-m327ed.r-dnmrzs.r-494qqr.r-bnwqim.r-1plcrui.r-lrvibr {
+        width: 70%;
+        
+        .r-jwli3a {
+            color: rgb(255, 255, 255) !important;
+        }
+    }
+    
+    
+}
+
+.rightSide{
+    width: 60%;
+    padding: 1%;
+
+    .logoTwitter{
+        width: 8%;
+    }
+
+    .titleLogin, .subTitleLogin{
+        font-size: 12vh;
+        font-weight: 700;
+        padding: 2% 16% 2% 2%;
+    }
+
+    .subTitleLogin{
+        font-size: 4vh !important;
+        font-weight: 600 !important;
+    }
+
+    form{
+        padding: 1% 20% 1% 2%;
+    }
+}
+
