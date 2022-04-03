@@ -91,8 +91,8 @@
     <div class="top-fixed">
         {% if app.request.attributes.get('_route') == 'app_home' %}
             <a href="{{ path("app_home") }}" class="link-home">Accueil</a>
-        {% elseif app.request.attributes.get('_route') == '' %}
-
+        {% elseif app.request.attributes.get('_route') == 'show_post' %}
+            <h1 class="link-home">Voir un post</h1>
         {% endif %} 
     </div>
 
