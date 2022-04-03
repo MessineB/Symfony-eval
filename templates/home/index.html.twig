@@ -11,17 +11,30 @@
 {% endblock %}
 
 {% block body %}
-  {# Inclusion de la sidebar de gauche  #}
-  {% include "_twitter_layout_left.html.twig" %}
+	{# Inclusion de la sidebar de gauche  #}
+  	{% include "_twitter_layout_left.html.twig" %}
+	<div class="write-twit">
+		{{ form_start(addPost) }}
 
-  <form action="" class="write-twit">
+		{{ form_row(addPost.title) }}
+
         <div class="picture-text">
             <img class="user-img-40" src="{{ post.user.img|default('https://avatars.dicebear.com/api/pixel-art/' ~ random() ~'.svg') }}" />
-            <textarea name="" id="" cols="30" rows="3" placeholder="Quoi de neuf?"></textarea>
+			{{ form_row(addPost.content) }}
         </div>
-        <button type="submit" class="add-tweet">Tweeter</button>
-  </form>
-
+		
+		<div class="input-group mb-3">
+  			<div class="input-group-prepend">
+    			<span class="input-group-text" id="basic-addon1"><label for="post_picture"><i class="fa-solid fa-upload"></i></label></span>
+  			</div>
+			{{ form_row(addPost.picture) }}
+			</div>
+		<div class="button-add-tweet">
+        	<button type="submit" class="add-tweet">Tweeter</button>
+		</div>
+	{{ form_end(addPost) }}
+	</div>
+	
 	{% for post in posts %}
 		<div class="tw-block-parent">
 		<div class="timeline-TweetList-tweet">

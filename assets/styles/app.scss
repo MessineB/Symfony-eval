@@ -415,6 +415,19 @@ a {
     color: #292f33;
 }
 
+.addPostInput{
+    border:none;
+}
+
+.button-add-tweet{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+input#post_picture {
+    visibility: hidden;
+}
+
 .Avatar {
     width: 32px;
     height: 32px;
@@ -604,3 +617,5 @@ a {
 }
 
 /* Fin messages Twitter */
+
+

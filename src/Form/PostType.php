@@ -17,13 +17,22 @@ class PostType extends AbstractType
     {
         $builder
             
-            ->add('title', TextType::class)
-            ->add('content', TextareaType::class)
-            ->add('picture', FileType::class)
-            ->add('submit', SubmitType::class, [
-                "label" => "Envoyer"
+            ->add('title', TextType::class,[
+                'label'=> false,
+                'attr'=>[
+                    'class'=> "form-control mb-4 addPostInput",
+                    'placeholder' => "Renseignez votre titre"
+                ]
             ])
-        ;
+            ->add('content', TextareaType::class,[
+                'label'=> false,
+                'attr'=>[
+                    'placeholder'=> "Quoi de neuf?"
+                ]
+            ])
+            ->add('picture', FileType::class,[
+                'label'=> false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
