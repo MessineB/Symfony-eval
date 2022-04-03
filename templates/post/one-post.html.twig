@@ -41,6 +41,7 @@
 			</div>
 		</div>   
 	</div>
+
 	<div class="write-twit">
 	{{ form_start(form) }}
         <div class="picture-text">
@@ -51,8 +52,8 @@
 	{{ form_end(form) }}
 	</div>
 
-    {% for comment in comments%}
-		<div class="tw-block-parent">
+{% for comment in comments%}
+	<div class="tw-block-parent">
 		<div class="timeline-TweetList-tweet">
 			<div class="timeline-Tweet">
 				<div class="timeline-Tweet-brand">
@@ -71,7 +72,8 @@
 				</ul>
 			</div>
 		</div>
-    {% endfor %}
+	</div>
+{% endfor %}
     
 
     {# Inclusion de la sidebar de droite  #}

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Résultat de recherche / Twitter{% endblock %}
+
+{% block stylesheets %}
+	{{parent()}}
+	{{ encore_entry_link_tags("show-post") }}
+{% endblock %}
+
+{% block javascripts %}
+	{{parent()}}
+	{{ encore_entry_script_tags("show-post") }}
+{% endblock %}
+
+{% block body %}
+    {# Inclusion de la sidebar de gauche  #}
+    {% include "_twitter_layout_left.html.twig" %}
+
+    <div class="tw-block-parent addMargin">
+    {% for post in posts %}
+		<div class="timeline-TweetList-tweet">
+			<div class="timeline-Tweet ">
+				<div class="timeline-Tweet-brand">
+					<div class="Icon Icon--twitter"></div>
+				</div>
+				<div class="timeline-Tweet-author">
+					<div class="TweetAuthor"><a class="TweetAuthor-link" href="#channel"> </a><span class="TweetAuthor-avatar"> 
+							<div class="Avatar"> </div></span><span class="TweetAuthor-name">{{post.user.username}} </span> <span class="Icon Icon--verified"> </span><span class="TweetAuthor-screenName">@{{post.user.username}} </span></div>
+				</div>
+				<div class="timeline-Tweet-text">{{post.content}}</div>
+				{% if post.picture is null %}
+	
+				{% else %}
+					<img src="{{images ~ post.picture}}" class="picture-post"/>
+				{% endif %}
+
+				<div class="timeline-Tweet-metadata"><span class="timeline-Tweet-timestamp">{{post.createdAt|date('d M Y H:i:s')}}</span></div>
+				<ul class="timeline-Tweet-actions">
+					<li class="timeline-Tweet-action"><a class="fa-regular fa-heart" href="#"></a></li>
+					<li class="timeline-Tweet-action"><a class="fa-solid fa-reply" href="{{ path('show_post', {'id': post.id}) }}"></a></li>
+				</ul>
+			</div>
+		</div>
+	{% endfor %}
+</div>
+    {# Inclusion de la sidebar de droite  #}
+    {% include "_twitter_layout_right.html.twig" %}
+
+{% endblock %}

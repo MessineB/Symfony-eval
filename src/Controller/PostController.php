@@ -29,13 +29,17 @@ class PostController extends AbstractController
             $post->setUser($user);
             $post->setStatus(["published"]);
             $post->setCreatedAt(new \DateTime());
+
+            #Traitement des images
             if ($picture = $form->get("picture")->getData()) {
                 $namePicture = pathinfo($picture->getClientOriginalName(), PATHINFO_FILENAME);
-                $namePicture = str_replace(" ", "", $namePicture);
+                $namePicture = str_replace(" ", "_", $namePicture);
                 $namePicture .= uniqid() . "." . $picture->guessExtension();
                 $picture->move($this->getParameter("images"), $namePicture);
+                
                 $post->setPicture($namePicture);
             } 
+
             $entityManager = $doctrine->getManager();
             $entityManager->persist($post);
             $entityManager->flush();
