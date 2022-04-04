@@ -75,7 +75,6 @@
                     <span>{{app.user.username}}</span>
                     {% endif %}
                 </a>
-
                 <div class="box">
                     {% if app.user.picture %}
                     <img src="{{ profile_image ~ app.user.picture}}" alt="" class="user-img-40">
@@ -87,8 +86,7 @@
                     <p class="username">@{{app.user.username}}</p>
                     <div class="bio">{{app.user.bio}}</div>
                         <div class="folow">
-                            <a href="#"><span>83</span> Following</a>
-                            <a href="#"><span>83</span> Followers</a>
+                            <a href="{{path('app_profile')}}"><span>{{ app.user.posts|length }}</span> Tweets</a>
                         </div>
                     <div class="logout">
                         <a href="{{path('app_logout')}}" class="linkLogout">Se déconnecter</a>

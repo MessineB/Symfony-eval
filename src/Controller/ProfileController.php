@@ -14,8 +14,10 @@ class ProfileController extends AbstractController
     { 
         $user = $this->getUser();
         $posts = $postrepo->findByUserid($user);
-        return $this->render('profile/index.html.twig', [
+        $nbrPost = count($posts);
+        return $this->render('profile/index.html.twig',  [
             'posts' => $posts,
+            'nbrPost' => $nbrPost,
         ]);
     }
 }
