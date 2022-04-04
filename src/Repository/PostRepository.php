@@ -52,8 +52,7 @@ class PostRepository extends ServiceEntityRepository
     public function search($value)
     {   //SELECT * FROM post as p WHERE p.title or WHERE p.content LIKE "%xxx%" ORDER BY p.created_at
         return $this->createQueryBuilder('p')//le paramètre p représente la table post (comme un alias dans une requête SQL)
-            ->where('p.title LIKE :val')
-            ->orWhere('p.content LIKE :val')
+            ->where('p.content LIKE :val')
             ->setParameter('val', "%$value%")
             ->orderBy('p.createdAt', 'ASC')
             ->getQuery()

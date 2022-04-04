@@ -16,8 +16,6 @@
 	<div class="write-twit">
 		{{ form_start(addPost) }}
 
-		{{ form_row(addPost.title) }}
-
         <div class="picture-text">
 			{% if app.user.picture %}
         		<img src="{{ profile_image ~ app.user.picture}}" alt="" class="user-img-40">
