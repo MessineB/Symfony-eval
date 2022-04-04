@@ -71,7 +71,7 @@
                     <img src="{{ profile_image ~ app.user.picture}}" alt="" class="user-img-30">
                     <span>{{app.user.username}}</span>
                     {% else %}
-                    <img class="user-img-30" src="{{ post.user.img|default('https://avatars.dicebear.com/api/pixel-art/' ~ random() ~'.svg') }}" />
+                    <img class="user-img-30" src="../img/backgrounds/default_profile.png" />
                     <span>{{app.user.username}}</span>
                     {% endif %}
                 </a>
@@ -79,7 +79,7 @@
                     {% if app.user.picture %}
                     <img src="{{ profile_image ~ app.user.picture}}" alt="" class="user-img-40">
                     {% else %}
-                    <img class="user-img-40" src="{{ post.user.img|default('https://avatars.dicebear.com/api/pixel-art/' ~ random() ~'.svg') }}" />
+                    <img class="user-img-40" src="../img/backgrounds/default_profile.png" />
                     {% endif %}
 
                     <p class="name">{{app.user.username}}</p>
@@ -106,6 +106,8 @@
             <h1 class="link-home">Voir un post</h1>
         {% elseif app.request.attributes.get('_route') == 'app_search' %}
             <h1 class="link-home">Résultat de recherche</h1>
+        {% elseif app.request.attributes.get('_route') == 'app_profile' %}
+        <h1 class="link-home">Profil</h1>
         {% endif %} 
     </div>
 
