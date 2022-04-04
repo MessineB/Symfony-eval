@@ -50,14 +50,14 @@
                     <span>Profil</span>
                 </a>
             </li>
-
-            <li class="menu-item">
-                <a class="menu-link" href="#">
-                    <i class="fas fa-ellipsis-h"></i>
-                    <span>Plus</span>
-                </a>
-            </li>
-
+            {% if is_granted("ROLE_ADMIN") %}
+                <li class="menu-item">
+                    <a class="menu-link" href="{{path('admin')}}">
+                        <i class="fas fa-ellipsis-h"></i>
+                        <span>Administrateur</span>
+                    </a>
+                </li>
+            {% endif %}
             <li class="button-add-twit">
                 <a class="add-twit" href="#">
                     <span>Tweeter</span>

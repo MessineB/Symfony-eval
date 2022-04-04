@@ -46,7 +46,7 @@ class HomeController extends AbstractController
             $this->addFlash('success', 'Votre post a été créé avec succès !');
         }
 
-       /*  if ($form->isSubmitted() && $form->getErrors()) {
+        /*  if ($form->isSubmitted() && $form->getErrors()) {
             $this->addFlash('warning', 'Vérifiez d\'avoir remplis tous les champs requis');
         } */
 
