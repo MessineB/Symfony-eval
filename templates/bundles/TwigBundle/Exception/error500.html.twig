@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block h1 %}Erreur 500{% endblock %}
+
+{% block stylesheets %}
+    {{parent()}}
+    {{ encore_entry_link_tags('error') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}} 
+    {{ encore_entry_script_tags('error') }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="middle">
+        <h1 class="title">Oups !</h1>
+        <br>
+        <p class="sentence">Une erreur est survenue... Veuillez réessayer d'accéder à cette page ultérieurement (Erreur 500)</p>
+        <br>
+        <div class="btn-anim">
+            <button type="button" class="bouton"><a href="{{ path("app_home") }}">Retour à l'accueil</a></button>
+        </div>
+    </div>
+{% endblock %}

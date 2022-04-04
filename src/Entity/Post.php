@@ -130,7 +130,6 @@ class Post
                 $comment->setPost(null);
             }
         }
-
         return $this;
     }
 }

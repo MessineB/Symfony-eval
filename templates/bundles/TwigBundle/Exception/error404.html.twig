@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    {{parent()}}
+    {{ encore_entry_link_tags('error') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    {{ encore_entry_script_tags('error') }}
+{% endblock %}
+
+{% block h1 %}Erreur 404 {% endblock %}
+
+
+{% block body %}
+    <div class="middle">
+        <h1 class="title">Oups ! Page introuvable</h1>
+        <br>
+        <p class="sentence">La page demandée n'existe pas (Erreur 404)</p>
+        <br>
+        <div class="btn-anim">
+            <button type="button" class="bouton"><a href="{{ path("app_home") }}">Retour à l'accueil</a></button>
+        </div>
+    </div>
+{% endblock %}

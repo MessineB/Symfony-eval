@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block h1 %}Erreur 403 {% endblock %}
+
+{% block stylesheets %}
+     {{parent()}} 
+    {{ encore_entry_link_tags('error') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    {{ encore_entry_script_tags('error') }}
+{% endblock %}
+
+{% block body %}
+    <div class="middle">
+        <h1 class="title">Oups ! Accès interdit</h1>
+        <br>
+        <p class="sentence">Vous n'êtes pas autorisé à accéder à cette page !</p>
+        <br>
+        <div class="btn-anim">
+            <button type="button" class="bouton"><a href="{{ path("app_home") }}">Retour à l'accueil</a></button>
+        </div>
+    </div>
+{% endblock %}

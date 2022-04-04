@@ -37,7 +37,6 @@ class PostController extends AbstractController
             $newComment->setPost($post);
             $newComment->setStatus(["published"]);
             $newComment->setCreatedAt(new \DateTime());
-
             $entityManager = $doctrine->getManager();
             $entityManager->persist($newComment);
             $entityManager->flush();
@@ -49,5 +48,17 @@ class PostController extends AbstractController
             'form' => $form->createView(),
             'comments'=> $comments
         ]);
+
     }
+
+        /* Voir un seul post */
+        #[Route('/tous-les-posts', name: 'admin_post', methods: ['GET', 'POST'])]
+        #[IsGranted("ROLE_ADMIN")]
+        public function postAdmin(): Response
+        {
+    
+            return $this->render('post/admin-post.html.twig', [
+            ]);
+    
+        }
 }
