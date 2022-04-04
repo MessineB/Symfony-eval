@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SearchController extends AbstractController
 {
-    #[Route('/search', name: 'app_search', methods:['GET', 'POST'])]
+    #[Route('/recherche', name: 'app_search', methods:['GET', 'POST'])]
     public function index(Request $rq, PostRepository $pr): Response
     {
         $word = $rq->query->get("search");

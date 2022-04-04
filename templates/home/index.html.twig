@@ -47,9 +47,9 @@
 				<div class="timeline-Tweet-author">
 					<div class="TweetAuthor"><a class="TweetAuthor-link" href="#channel"> </a><span class="TweetAuthor-avatar"> 
 					{% if post.user.picture is null %}
-					<div class="Avatar" style="background: url('../img/backgrounds/default_profile.png');"> </div></span><span class="TweetAuthor-name">{{post.user.username}} </span> <span class="Icon Icon--verified"> </span><span class="TweetAuthor-screenName">@{{post.user.username}} </span></div>
+					<div class="Avatar" style="background: url('../img/backgrounds/default_profile.png');"> </div></span><span class="TweetAuthor-name">{{post.user.firstname}} {{post.user.lastname}} </span> <span class="Icon Icon--verified"> </span><span class="TweetAuthor-screenName">@{{post.user.username}} </span></div>
 					{% else %}
-						<div class="Avatar" style="background: url({{profile_image ~ post.user.picture}});"> </div></span><span class="TweetAuthor-name">{{post.user.username}} </span> <span class="Icon Icon--verified"> </span><span class="TweetAuthor-screenName">@{{post.user.username}} </span></div>
+						<div class="Avatar" style="background: url({{profile_image ~ post.user.picture}});"> </div></span><span class="TweetAuthor-name">{{post.user.firstname}} {{post.user.lastname}} </span> <span class="Icon Icon--verified"> </span><span class="TweetAuthor-screenName">@{{post.user.username}} </span></div>
 					{% endif %}
 				</div>
 				<div class="timeline-Tweet-text">{{post.content}}</div>

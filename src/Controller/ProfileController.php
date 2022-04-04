@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProfileController extends AbstractController
 {
-    #[Route('/profile', name: 'app_profile')]
+    #[Route('/profil', name: 'app_profile')]
     public function index(PostRepository $postrepo,): Response
     { 
         $user = $this->getUser();

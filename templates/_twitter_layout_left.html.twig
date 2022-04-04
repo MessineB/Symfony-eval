@@ -69,10 +69,10 @@
                 <a class="menu-link" href="#">
                     {% if app.user.picture %}
                     <img src="{{ profile_image ~ app.user.picture}}" alt="" class="user-img-30">
-                    <span>{{app.user.username}}</span>
+                    <span>{{app.user.firstname}}</span>
                     {% else %}
                     <img class="user-img-30" src="../img/backgrounds/default_profile.png" />
-                    <span>{{app.user.username}}</span>
+                    <span>{{app.user.firstname}}</span>
                     {% endif %}
                 </a>
                 <div class="box">
@@ -82,7 +82,7 @@
                     <img class="user-img-40" src="../img/backgrounds/default_profile.png" />
                     {% endif %}
 
-                    <p class="name">{{app.user.username}}</p>
+                    <p class="name">{{app.user.firstname}} {{app.user.lastname}}</p>
                     <p class="username">@{{app.user.username}}</p>
                     <div class="bio">{{app.user.bio}}</div>
                         <div class="folow">
