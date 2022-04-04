@@ -34,8 +34,10 @@ class RegistrationController extends AbstractController
             $entityManager = $doctrine->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            return $this->redirectToRoute('app_login');
+
             $this->addFlash('success', 'Votre compte a été créé avec succès ! Veuillez vous authentifier');
+            return $this->redirectToRoute('app_login');
+            
         }
         //Si le formulaire est soumis et qu'il y a des erreurs:
         if ($form->isSubmitted() && $form->getErrors()) {
