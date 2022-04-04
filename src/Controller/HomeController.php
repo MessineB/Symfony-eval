@@ -15,9 +15,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
-    #[Route('/accueil', name: 'app_home', methods: ['POST','GET'])]
+    #[Route('/Accueil/{page?1}', name: 'app_home', methods: ['POST','GET'])]
     #[IsGranted("ROLE_USER")]
-    public function home(PostRepository $postRepository, ManagerRegistry $doctrine, Request $request): Response
+    public function home(PostRepository $postRepository, ManagerRegistry $doctrine, Request $request, $page): Response
     {
 
         $post = new Post();
@@ -50,9 +50,18 @@ class HomeController extends AbstractController
             $this->addFlash('warning', 'Vérifiez d\'avoir remplis tous les champs requis');
         } */
 
+        //pour la pagination
+        $nbrParPage = 3;
+        $array = [];
+        $array = $postRepository->findAll();
+        $nbrPost = count($array);
+        $nbrPage = ceil($nbrPost / $nbrParPage);
+
         return $this->render('home/index.html.twig', [
             'addPost' => $form->createView(),
-            'posts' => $postRepository->findAll(),
+            'posts' => $postRepository->findBy([],[],$nbrParPage,($page - 1) * $nbrParPage),
+            'nbrPage' => $nbrPage,
+            'page' => $page
         ]);
     }
 }
