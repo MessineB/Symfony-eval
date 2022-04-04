@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
-    #[Route('/Accueil/{page?1}', name: 'app_home', methods: ['POST','GET'])]
+    #[Route('/accueil/{page?1}', name: 'app_home', methods: ['POST','GET'])]
     #[IsGranted("ROLE_USER")]
     public function home(PostRepository $postRepository, ManagerRegistry $doctrine, Request $request, $page): Response
     {
