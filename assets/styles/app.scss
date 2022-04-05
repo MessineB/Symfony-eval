@@ -295,7 +295,7 @@ a {
             border: 0;
             color: $color-grey;
             padding: 10px;
-            width: 100%;
+            width: 210%;
             font-size: 20px;
             outline: 0 none;
             resize: none;
@@ -621,3 +621,10 @@ input#post_picture {
 /* Fin messages Twitter */
 
 
+/* Pagination */
+.pagination {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+}
+/* Fin pagination */

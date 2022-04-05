@@ -24,6 +24,8 @@
 /public/build/
 npm-debug.log
 yarn-error.log
+/public/img/post
+/public/img/profile
 ###< symfony/webpack-encore-bundle ###
 
 .vscode

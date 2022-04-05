@@ -18,7 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
-    #[Route('/Accueil/{page?1}', name: 'app_home', methods: ['POST','GET'])]
+    #[Route('/accueil/{page?1}', name: 'app_home', methods: ['POST','GET'])]
     #[IsGranted("ROLE_USER")]
     public function home(PostRepository $postRepository, ManagerRegistry $doctrine, Request $request, $page): Response
     {
@@ -26,7 +26,6 @@ class HomeController extends AbstractController
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
-        
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
@@ -50,7 +49,7 @@ class HomeController extends AbstractController
             $this->addFlash('success', 'Votre post a été créé avec succès !');
         }
 
-       /*  if ($form->isSubmitted() && $form->getErrors()) {
+        /*  if ($form->isSubmitted() && $form->getErrors()) {
             $this->addFlash('warning', 'Vérifiez d\'avoir remplis tous les champs requis');
         } */
 

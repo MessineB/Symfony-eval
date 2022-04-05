@@ -52,8 +52,7 @@ class PostRepository extends ServiceEntityRepository
     public function search($value)
     {   //SELECT * FROM post as p WHERE p.title or WHERE p.content LIKE "%xxx%" ORDER BY p.created_at
         return $this->createQueryBuilder('p')//le paramètre p représente la table post (comme un alias dans une requête SQL)
-            ->where('p.title LIKE :val')
-            ->orWhere('p.content LIKE :val')
+            ->where('p.content LIKE :val')
             ->setParameter('val', "%$value%")
             ->orderBy('p.createdAt', 'ASC')
             ->getQuery()
@@ -64,19 +63,41 @@ class PostRepository extends ServiceEntityRepository
     // /**
     //  * @return Post[] Returns an array of Post objects
     //  */
-    /*
-    public function findByExampleField($value)
+    
+    public function findByUserid($value)
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
+            ->andWhere("p.user = :val")
             ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('p.createdAt', 'ASC')
             ->getQuery()
             ->getResult()
         ;
     }
+
+    /**
+    * @return Post[] Returns an array of Post objects order by like
     */
+    
+    public function orderByLike()
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p')
+            ->addSelect('COUNT(l.post)')
+            ->leftJoin(
+                'App\Entity\PostLike',
+                'l',
+                'WITH',
+                'p.id = l.post'
+            ) 
+            ->groupBy('p.id')
+            ->orderBy('l.post', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
+
 
     /*
     public function findOneBySomeField($value): ?Post

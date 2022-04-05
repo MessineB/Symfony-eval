@@ -45,19 +45,19 @@
                 </a>
             </li>
             <li class="menu-item">
-                <a class="menu-link" href="#">
+                <a class="menu-link" href="{{path('app_profile')}}">
                     <i class="fas fa-user"></i>
                     <span>Profil</span>
                 </a>
             </li>
-
-            <li class="menu-item">
-                <a class="menu-link" href="#">
-                    <i class="fas fa-ellipsis-h"></i>
-                    <span>Plus</span>
-                </a>
-            </li>
-
+            {% if is_granted("ROLE_ADMIN") %}
+                <li class="menu-item">
+                    <a class="menu-link" href="{{path('admin')}}">
+                        <i class="fas fa-ellipsis-h"></i>
+                        <span>Administrateur</span>
+                    </a>
+                </li>
+            {% endif %}
             <li class="button-add-twit">
                 <a class="add-twit" href="#">
                     <span>Tweeter</span>
@@ -69,26 +69,24 @@
                 <a class="menu-link" href="#">
                     {% if app.user.picture %}
                     <img src="{{ profile_image ~ app.user.picture}}" alt="" class="user-img-30">
-                    <span>{{app.user.username}}</span>
+                    <span>{{app.user.firstname}}</span>
                     {% else %}
-                    <img class="user-img-30" src="{{ post.user.img|default('https://avatars.dicebear.com/api/pixel-art/' ~ random() ~'.svg') }}" />
-                    <span>{{app.user.username}}</span>
+                    <img class="user-img-30" src="../img/backgrounds/default_profile.png" />
+                    <span>{{app.user.firstname}}</span>
                     {% endif %}
                 </a>
-
                 <div class="box">
                     {% if app.user.picture %}
                     <img src="{{ profile_image ~ app.user.picture}}" alt="" class="user-img-40">
                     {% else %}
-                    <img class="user-img-40" src="{{ post.user.img|default('https://avatars.dicebear.com/api/pixel-art/' ~ random() ~'.svg') }}" />
+                    <img class="user-img-40" src="../img/backgrounds/default_profile.png" />
                     {% endif %}
 
-                    <p class="name">{{app.user.username}}</p>
+                    <p class="name">{{app.user.firstname}} {{app.user.lastname}}</p>
                     <p class="username">@{{app.user.username}}</p>
                     <div class="bio">{{app.user.bio}}</div>
                         <div class="folow">
-                            <a href="#"><span>83</span> Following</a>
-                            <a href="#"><span>83</span> Followers</a>
+                            <a href="{{path('app_profile')}}"><span>{{ app.user.posts|length }}</span> Tweets</a>
                         </div>
                     <div class="logout">
                         <a href="{{path('app_logout')}}" class="linkLogout">Se déconnecter</a>
@@ -108,6 +106,8 @@
             <h1 class="link-home">Voir un post</h1>
         {% elseif app.request.attributes.get('_route') == 'app_search' %}
             <h1 class="link-home">Résultat de recherche</h1>
+        {% elseif app.request.attributes.get('_route') == 'app_profile' %}
+        <h1 class="link-home">Profil</h1>
         {% endif %} 
     </div>
 
