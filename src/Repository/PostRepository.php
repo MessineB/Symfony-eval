@@ -83,13 +83,14 @@ class PostRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->select('p')
+            ->addSelect('COUNT(l.post)')
             ->leftJoin(
                 'App\Entity\PostLike',
                 'l',
                 'WITH',
                 'p.id = l.post'
             ) 
-            ->where('p.id = l.post')
+            ->groupBy('p.id')
             ->orderBy('l.post', 'ASC')
             ->getQuery()
             ->getResult()

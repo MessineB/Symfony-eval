@@ -63,40 +63,40 @@
 	{{ form_end(form) }}
 	</div>
 	{% else %}
-	<h3> Ce thread est clôt. </h3>
+	<p class="alert alert-danger text-center" role="alert">Ce thread est clôt. Vous ne pouvez plus poster de commentaire.</p>	
 	{% endif %}
 
 {% for comment in comments %}
-{% if comment.status[0] != 'hide'  %}
-	<div class="tw-block-parent">
-		<div class="timeline-TweetList-tweet">
-			<div class="timeline-Tweet">
-				<div class="timeline-Tweet-brand">
-					<div class="Icon Icon--twitter"></div>
-				</div>
-				<div class="timeline-Tweet-author">
-					<div class="TweetAuthor"><a class="TweetAuthor-link" href="#channel"> </a><span class="TweetAuthor-avatar"> 
-					{% if comment.user.picture is null %}
-						<div class="Avatar" style="background: url('../img/backgrounds/default_profile.png');"> </div></span><span class="TweetAuthor-name">{{post.user.username}} </span> <span class="Icon Icon--verified"> </span><span class="TweetAuthor-screenName">@{{post.user.username}} </span></div>
+	{% if comment.status[0] != 'hide'  %}
+		<div class="tw-block-parent">
+			<div class="timeline-TweetList-tweet">
+				<div class="timeline-Tweet comments">
+					<div class="timeline-Tweet-brand">
+						<div class="Icon Icon--twitter"></div>
+					</div>
+					<div class="timeline-Tweet-author">
+						<div class="TweetAuthor"><a class="TweetAuthor-link" href="#channel"> </a><span class="TweetAuthor-avatar"> 
+						{% if comment.user.picture is null %}
+							<div class="Avatar" style="background: url('../img/backgrounds/default_profile.png');"> </div></span><span class="TweetAuthor-name">{{post.user.username}} </span> <span class="Icon Icon--verified"> </span><span class="TweetAuthor-screenName">@{{post.user.username}} </span></div>
+						{% else %}
+							<div class="Avatar" style="background: url({{profile_image ~ comment.user.picture}});"> </div></span><span class="TweetAuthor-name">{{comment.user.username}} </span> <span class="Icon Icon--verified"> </span><span class="TweetAuthor-screenName">@{{comment.user.username}} </span></div>
+						{% endif %}
+
+					</div>
+					<div class="timeline-Tweet-text">{{comment.content}}</div>
+
+					<div class="timeline-Tweet-metadata"><span class="timeline-Tweet-timestamp">{{comment.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY kk:mm:ss")}}</span></div>
+					<ul class="timeline-Tweet-actions">
+						{% if app.user and comment.isLikedByUser(app.user) %}					
+						<li class="timeline-Tweet-action"><a class="fa-solid fa-heart" href="{{ path('comment_like',{'id': comment.id}) }}"><span>{{ comment.commentLikes | length }}</span></a></li>
 					{% else %}
-						<div class="Avatar" style="background: url({{profile_image ~ comment.user.picture}});"> </div></span><span class="TweetAuthor-name">{{comment.user.username}} </span> <span class="Icon Icon--verified"> </span><span class="TweetAuthor-screenName">@{{comment.user.username}} </span></div>
+						<li class="timeline-Tweet-action"><a class="fa-regular fa-heart" href="{{ path('comment_like',{'id': comment.id}) }}"><span>{{ comment.commentLikes | length }}</span></a></li>
 					{% endif %}
-
+					</ul>
 				</div>
-				<div class="timeline-Tweet-text">{{comment.content}}</div>
-
-				<div class="timeline-Tweet-metadata"><span class="timeline-Tweet-timestamp">{{comment.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY kk:mm:ss")}}</span></div>
-				<ul class="timeline-Tweet-actions">
-					{% if app.user and comment.isLikedByUser(app.user) %}					
-					<li class="timeline-Tweet-action"><a class="fa-solid fa-heart" href="{{ path('comment_like',{'id': comment.id}) }}"><span>{{ comment.commentLikes | length }}</span></a></li>
-				{% else %}
-					<li class="timeline-Tweet-action"><a class="fa-regular fa-heart" href="{{ path('comment_like',{'id': comment.id}) }}"><span>{{ comment.commentLikes | length }}</span></a></li>
-				{% endif %}
-				</ul>
 			</div>
 		</div>
-	</div>
-{% endif %}
+	{% endif %}
 {% endfor %}
     
 
