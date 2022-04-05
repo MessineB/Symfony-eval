@@ -7,6 +7,8 @@ use App\Entity\Post;
 use App\Form\PostType;
 use App\Entity\Comment;
 use App\Form\CommentType;
+use App\Entity\CommentLike;
+use App\Repository\CommentLikeRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,4 +52,49 @@ class PostController extends AbstractController
             'comments'=> $comments
         ]);
     }
+    /**
+     * Permet de like un comment
+     * 
+     * @param Comment $comment
+     * @param ObjectManager $manager
+     * @param LikeCommentRepository $likeRepo
+     * @return Response
+     */
+    #[Route('/comment/{id}', name: 'comment_like', methods: ['GET'])]
+    #[IsGranted("ROLE_USER")]
+    public function like(Comment $comment, ManagerRegistry $manager, CommentLikeRepository $likeRepo, Request $request): Response
+    {
+        $user = $this->getUser();
+        $entityManager = $manager->getManager();
+
+        if ($comment->isLikedByUser($user)) {
+            $like = $likeRepo->findOneBy([
+                'comment' => $comment,
+                'user' => $user
+            ]);
+
+            $entityManager->remove($like);
+            $entityManager->flush();
+
+            return $this->redirectToRoute(
+                'show_post',
+                ['id' => $comment->getPost()->getId()],
+                Response::HTTP_SEE_OTHER
+            );
+        }
+
+
+        $like = new CommentLike();
+        $like->setComment($comment)
+            ->setUser($user);
+        $entityManager->persist($like);
+        $entityManager->flush();
+
+        return $this->redirectToRoute(
+            'show_post',
+            ['id' => $comment->getPost()->getId()],
+            Response::HTTP_SEE_OTHER
+        );
+    }
 }
+

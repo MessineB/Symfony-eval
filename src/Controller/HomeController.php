@@ -5,7 +5,10 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\Post;
 use App\Form\PostType;
+use App\Entity\PostLike;
 use App\Repository\PostRepository;
+use App\Repository\PostLikeRepository;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,5 +67,41 @@ class HomeController extends AbstractController
             'nbrPage' => $nbrPage,
             'page' => $page
         ]);
+    }
+
+    /**
+     * Permet de like un post
+     * 
+     * @param Post $post
+     * @param ObjectManager $manager
+     * @param PostLikeRepository $likeRepo
+     * @return Response
+     */
+    #[Route('/post/{id}/like', name: 'post_like', methods: ['GET'])]
+    #[IsGranted("ROLE_USER")]
+    //permet de liker ou unliker un post
+    public function like(Post $post, ManagerRegistry $doctrine , PostLikeRepository $likeRepo) : Response  
+    {
+        $user = $this->getUser();
+        $entityManager = $doctrine->getManager();
+
+        if ($post->isLikedByUser($user)) {
+            $like = $likeRepo->findOneBy([
+                'post' => $post,
+                'user' => $user
+            ]);
+           
+            $entityManager->remove($like);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
+        }
+        
+        $like = new PostLike() ;
+        $like->setPost($post)->setUser($user);
+        $entityManager->persist($like);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }
 }

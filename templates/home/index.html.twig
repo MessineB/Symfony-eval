@@ -63,7 +63,11 @@
 
 				<div class="timeline-Tweet-metadata"><span class="timeline-Tweet-timestamp">{{post.createdAt|date('d M Y H:i:s')}}</span></div>
 				<ul class="timeline-Tweet-actions">
-					<li class="timeline-Tweet-action"><a class="fa-regular fa-heart" href="#"></a></li>
+				{% if app.user and post.isLikedByUser(app.user) %}					
+					<li class="timeline-Tweet-action"><a class="fa-solid fa-heart" href="{{ path('post_like',{'id': post.id}) }}"><span>{{ post.likes | length }}</span></a></li>
+				{% else %}
+					<li class="timeline-Tweet-action"><a class="fa-regular fa-heart" href="{{ path('post_like',{'id': post.id}) }}"><span>{{ post.likes | length }}</span></a></li>
+				{% endif %}
 					<li class="timeline-Tweet-action"><a class="fa-solid fa-reply" href="{{ path('show_post', {'id': post.id}) }}"></a></li>
 				</ul>
 			</div>

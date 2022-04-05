@@ -80,7 +80,11 @@
 
 				<div class="timeline-Tweet-metadata"><span class="timeline-Tweet-timestamp">{{comment.createdAt|date('d M Y H:i:s')}}</span></div>
 				<ul class="timeline-Tweet-actions">
-					<li class="timeline-Tweet-action"><a class="fa-regular fa-heart" href="#"></a></li>
+					{% if app.user and comment.isLikedByUser(app.user) %}					
+					<li class="timeline-Tweet-action"><a class="fa-solid fa-heart" href="{{ path('comment_like',{'id': comment.id}) }}"><span>{{ comment.commentLikes | length }}</span></a></li>
+				{% else %}
+					<li class="timeline-Tweet-action"><a class="fa-regular fa-heart" href="{{ path('comment_like',{'id': comment.id}) }}"><span>{{ comment.commentLikes | length }}</span></a></li>
+				{% endif %}
 				</ul>
 			</div>
 		</div>

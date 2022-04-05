@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\CommentRepository;
+use App\Entity\CommentLike;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CommentRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
@@ -29,6 +32,14 @@ class Comment
 
     #[ORM\Column(type: 'json')]
     private $status = [];
+
+    #[ORM\OneToMany(mappedBy: 'comment', targetEntity: CommentLike::class)]
+    private $commentLikes;
+
+    public function __construct()
+    {
+        $this->commentLikes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -91,6 +102,44 @@ class Comment
     public function setStatus(array $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+    //permet de savoir si un comment est liké par un utilisateur
+    public function isLikedByUser(User $user) : bool 
+    {
+        foreach($this->commentLikes as $commentlike) {
+            if ($commentlike->getUser() === $user) return true;
+        }
+        return false;
+    }
+
+    /**
+     * @return Collection<int, CommentLike>
+     */
+    public function getCommentLikes(): Collection
+    {
+        return $this->commentLikes;
+    }
+
+    public function addCommentLike(CommentLike $commentLike): self
+    {
+        if (!$this->commentLikes->contains($commentLike)) {
+            $this->commentLikes[] = $commentLike;
+            $commentLike->setComment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentLike(CommentLike $commentLike): self
+    {
+        if ($this->commentLikes->removeElement($commentLike)) {
+            // set the owning side to null (unless already changed)
+            if ($commentLike->getComment() === $this) {
+                $commentLike->setComment(null);
+            }
+        }
 
         return $this;
     }
