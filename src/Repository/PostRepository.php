@@ -74,7 +74,29 @@ class PostRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    /**
+    * @return Post[] Returns an array of Post objects order by like
+    */
     
+    public function orderByLike()
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p')
+            ->leftJoin(
+                'App\Entity\PostLike',
+                'l',
+                'WITH',
+                'p.id = l.post'
+            ) 
+            ->where('p.id = l.post')
+            ->orderBy('l.post', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
+
 
     /*
     public function findOneBySomeField($value): ?Post

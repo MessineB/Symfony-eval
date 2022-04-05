@@ -21,7 +21,7 @@ class PostCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
+            IdField::new('id')->hideOnForm(),
             TextField::new('content'),
             ArrayField::new('status'),
             ImageField::new('picture')->setUploadDir('/public/img/post'),

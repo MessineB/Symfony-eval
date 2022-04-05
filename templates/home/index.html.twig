@@ -38,6 +38,7 @@
 	</div>
 	
 	{% for post in posts %}
+	{% if post.status[0] != 'hide' %}
 		<div class="tw-block-parent">
 		<div class="timeline-TweetList-tweet">
 			<div class="timeline-Tweet">
@@ -71,7 +72,7 @@
 			</div>
 		</div>
 	</div>
-
+	{% endif %}
 	{% endfor %}
 
 	{#ajout de la pagination#}
