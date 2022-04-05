@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
-use DateTime;
+use App\Entity\Hashtag;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Entity\PostLike;
+use App\Repository\HashtagRepository;
 use App\Repository\PostRepository;
 use App\Repository\PostLikeRepository;
 use Doctrine\Persistence\ObjectManager;
@@ -20,7 +21,7 @@ class HomeController extends AbstractController
 {
     #[Route('/accueil/{page?1}', name: 'app_home', methods: ['POST','GET'])]
     #[IsGranted("ROLE_USER")]
-    public function home(PostRepository $postRepository, ManagerRegistry $doctrine, Request $request, $page): Response
+    public function home(PostRepository $postRepository, ManagerRegistry $doctrine, Request $request, HashtagRepository $hashtagRepo, $page): Response
     {
 
         $post = new Post();
@@ -32,6 +33,36 @@ class HomeController extends AbstractController
             $post->setUser($user);
             $post->setStatus(["published"]);
             $post->setCreatedAt(new \DateTime());
+            
+            #On parse l'input contenu du formulaire pour ne récupérer que les #
+            $content = $form->get('content')->getData();
+            preg_match_all("/(#\w+)/u", $content, $result);
+
+        
+            foreach($result[0] as $value){
+                
+                $hashtag = new Hashtag();
+                
+                $oldHashtag = $hashtagRepo->findByContent($value);
+
+                if($oldHashtag != null){
+
+                    $countHashtag = $oldHashtag[0]->getCount();
+                    $countHashtag += 1;
+                    $oldHashtag[0]->setCount($countHashtag);
+
+                }else{
+
+                    $hashtag->setContent($value);
+                    $hashtag->setCount(1);
+
+                    $entityManager = $doctrine->getManager();
+                    $entityManager->persist($hashtag);
+                    $entityManager->flush();
+
+                }
+                
+            }
 
             #Traitement des images
             if ($picture = $form->get("picture")->getData()) {
@@ -49,11 +80,7 @@ class HomeController extends AbstractController
             $this->addFlash('success', 'Votre post a été créé avec succès !');
         }
 
-        /*  if ($form->isSubmitted() && $form->getErrors()) {
-            $this->addFlash('warning', 'Vérifiez d\'avoir remplis tous les champs requis');
-        } */
-
-        //pour la pagination
+        //Pour la pagination
         $nbrParPage = 3;
         $array = [];
         $array = $postRepository->findAll();
@@ -64,7 +91,8 @@ class HomeController extends AbstractController
             'addPost' => $form->createView(),
             'posts' => $postRepository->findBy([],[],$nbrParPage,($page - 1) * $nbrParPage),
             'nbrPage' => $nbrPage,
-            'page' => $page
+            'page' => $page,
+            'hashtags' => $hashtagRepo->findByCount()
         ]);
     }
 

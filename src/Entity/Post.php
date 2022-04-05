@@ -42,6 +42,8 @@ class Post
     {
         $this->comments = new ArrayCollection();
         $this->likes = new ArrayCollection();
+        $this->hashtag = new ArrayCollection();
+        $this->posts = new ArrayCollection();
     }
 
     public function getId(): ?int

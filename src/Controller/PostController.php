@@ -9,6 +9,7 @@ use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Entity\CommentLike;
 use App\Repository\CommentLikeRepository;
+use App\Repository\HashtagRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +23,7 @@ class PostController extends AbstractController
     /* Voir un seul post */
     #[Route('/voir-un-post/{id}', name: 'show_post', methods: ['GET', 'POST'])]
     #[IsGranted("ROLE_USER")]
-    public function showOnePost(Post $post, ManagerRegistry $doctrine, Request $request): Response
+    public function showOnePost(Post $post, ManagerRegistry $doctrine, Request $request, HashtagRepository $hashtagRepo): Response
     {
         /* Récupération des commentaire d'un post */
         $comments = $post->getComments();
@@ -49,7 +50,8 @@ class PostController extends AbstractController
         return $this->render('post/one-post.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
-            'comments'=> $comments
+            'comments'=> $comments,
+            'hashtags' => $hashtagRepo->findByCount()
         ]);
     }
     /**
