@@ -24,7 +24,7 @@ class PostCrudController extends AbstractCrudController
             IdField::new('id'),
             TextField::new('content'),
             ArrayField::new('status'),
-            ImageField::new('picture'),
+            ImageField::new('picture')->setUploadDir('/public/img/post'),
             DateField::new('created_at')
         ];
     }
